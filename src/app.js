@@ -13,7 +13,21 @@ const app = async (args) => {
       };
       await addMovie(movieObj);
       //run add movie functionality, passing a movieObj
-    
+    } else if (args.delete) {
+      const movieObj = { title: args.title };
+      await deleteMovie(movieObj);
+      mongoose.disconnect();
+    } else if (args.list) {
+      await listAllMovies();
+      mongoose.disconnect();
+    } else if (args.update) {
+      const movieObj = {
+        title: args.title,
+        actor: args.actor,
+        rating: args.rating,
+      };
+      await updateMovie(movieObj);
+      mongoose.disconnect();
     } else {
       console.log('Incorrect command');
       mongoose.disconnect();
